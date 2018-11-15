@@ -16,6 +16,8 @@ returns a string representation of a json, with the following fields:
 score - overall emotion of a document
 magnitude - amount of emotional content in the text
 """
+
+
 def getTextSentiment(text):
     document = language.types.Document(
         content=text,
@@ -26,9 +28,17 @@ def getTextSentiment(text):
 
     sentiment = response.document_sentiment
 
+
     toConvert = {"score": sentiment.score, "magnitude":sentiment.magnitude}
 
     return json.dumps(toConvert)
+
+"""
+getTextSentiment takes in HTML to run sentiment analysis on
+returns a string representation of a json, with the following fields:
+score - overall emotion of a document
+magnitude - amount of emotional content in the text
+"""
 
 
 def getHTMLSentiment(html):
