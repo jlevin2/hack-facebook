@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hackfacebook-222621",
+  "private_key_id": "4f898e3d935ed098d0945f6bbbb944b606e34007",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCcVjz15FIOscNX\nzxWdYPZVNmOAdxpj61/jFCJ4BB9/Ln49LERZrQmXcfICMxo2GNwqx/FGBBjcRPV2\n7Fj1km+h00wZSDAacQZ8xmBcyD+++btBEMB9lGdke5sbdE3W2YBtP1unBfHa3S0b\nUvJP4epm4o7EqdqWRpD6XJW6Y8Pdr6DEABTzrU/cxwRzX4PC8zMQ5GL2VEhb++RZ\npujZ3BnMitjicIHku9gDccdQ0zQDBrDk6LzAmOxQfz2mkY5wrgl3B/HwHgbHUev1\n7snmMM9kWD5ljF4yFboT8bhXFJ1OQ8JMSPmLylZj+09Ra4R51+gbV2X05gqKbjfR\nUUxjyZj1AgMBAAECggEABHcyJpPvBBxvyAJSS7yJTMXQ8cp1JoWCp6nbkjIL9EYP\ntQ+epDEdJQZMM2PiS8lKAK7VZXqYezI9ELiPkfQs3CJ8+fvl49t2o/nGpt/RclMP\n1jv0Q6IJkgU12QLpdkmgMX6tz4eL8QSAVVd5NG7vkyDFkziG1eQOIBik7j4LSjm+\nniJcnzxQz+YxmamodFmoFy9BMHl2TMTJrphEqSa+PtIrfPsam5pXF7xc+edyINwp\nrYUVuRePki+uLSYeeGCnEFmIbFaaKKINZIXDNOEpj93pzW/nt4I/oiAmrrozDhrO\nFDCxQkD1PmAsVGYL1e6pDWQGfskIQAEFRkWeBq3NwQKBgQDPaOyS5SWdUv6EqN8l\n9AxyyZtTP0ObqyGe10FXjzbzqqWDT4d7tXA6gVL4KHM3cMraIldboBloe7HYFVux\nq67vQqZkiebmoNP/hKADZoNivr9oVaV0bo4dTB3GtxvU7H5fLmOn03IpdusT11GX\nDb1bpjErIZqSnvw7qcAAxIzm/wKBgQDA9krtDU7NT++twmXSC+CseJsPwIx3U3Bd\nHXsAr+xXsj/SaG+k/ntiJcAUUVfG7C1FBpDvmTYgCWriuAHy2v8twoWMmKxkFYF5\nxAWDZwL4ilF/LTT6QRKrf6b6h8hm+Qm89q3fiheyfLufgFcpDJU3qg/RalVyTtO5\nhCneuhBUCwKBgA6HjCMSOFtYCAplBhTTjtevtdjUErlh+J32+FXY64GQT73uIVCS\nOkVu79AAjWmx1hQH2dTKV11RZPj9Lgo5O6z5H0zluC4p0BATS15RnRyavi/h6BBK\n+lulDGTySNnWo1epmUOVdWbgNMGUENwjE0PLVaBu3zQsPQE0+AVVv4UjAoGAVGVk\nr/m6FaJ4ug7kadI4GjdF2sXkqewcoR1bxxkqzdBwiZ6T9h436N2J/Vj2g1KZGi+d\nBK6GNczoqvDAKXAPW/xQXQYJoFynnJJXtvk/G2Wj73PeT/ZWLBxQ9BKfXCpgT/20\nXqkPZEmZ5lFDzfhq60W+VWGkrbI8eE+N4JSQv7ECgYAVJjZBBDOFe7M0pr9HD9nC\n0hB6N3KaKk5rNsAlAgAisNApxMJHmzB0c7P8zgKwCttyLEo0+1ZH3Giim0Sn65Uv\nFXuMBsKCG4xyvGgcVFfyFY5SgQA+QIx/9+dlfuaOd/DtSO6OmnbBBwUuSfU4/7TI\nawCLIm1yagh2jMmUD0jybg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "hackfacebook@hackfacebook-222621.iam.gserviceaccount.com",
+  "client_id": "104953904169074820437",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hackfacebook%40hackfacebook-222621.iam.gserviceaccount.com"
+}
