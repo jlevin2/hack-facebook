@@ -2,7 +2,7 @@
 
 ## Name TODO
 
-##Features:
+### Features:
 
 - Dynamic content trigger warnings
     - Current support includes Reddit & Facebook
