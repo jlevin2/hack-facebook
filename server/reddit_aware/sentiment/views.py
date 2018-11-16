@@ -1,16 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 import json
 import requests
 # Create your views here.
-from .getSentiment import getURLSentiment
+from .getSentimentObject import getURLSentiment
 from .models import SentDocument
 
 
 def response(inp):
     url = inp.GET.get('url')
 
-    return HttpResponse(json.dumps(handleRequest(url)))
+    return JsonResponse(handleRequest(url))
 
 
 def handleRequest(url):

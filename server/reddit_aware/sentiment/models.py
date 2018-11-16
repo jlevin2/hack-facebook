@@ -11,8 +11,8 @@ class SentDocument(models.Model):
         return self.page_id
 
     def as_dict(self):
-        return {
+        return dict({
             "page_id" : str(self.page_id),
             "score": str(self.score),
             "emotion": str(self.emotion)
-        }
+        })
