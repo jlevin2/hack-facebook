@@ -21,7 +21,7 @@
     ],
     "page_action": {
         "default_popup": "menu/menu.html",
-        "default_icon": "images/icon.png"
+        "default_icon": "images/active_icon.png"
     },
     "manifest_version": 2
 }

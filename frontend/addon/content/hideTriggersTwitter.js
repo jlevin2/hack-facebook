@@ -5,7 +5,7 @@
 var alreadyHidden = [];
 
 function mask(domObj, triggers){
-    if (!alreadyHidden.includes(domObj)) {
+        console.log('Masking');
         var previous_style = domObj.getAttribute('style');
         domObj.setAttribute('style', '-webkit-filter: blur(9px);'  + previous_style);
         var maskDiv = document.createElement("div");
@@ -18,20 +18,20 @@ function mask(domObj, triggers){
 
 
         var warningMessage = document.createElement('div');
-        warningMessage.setAttribute('style', 'text-align:center;position:absolute; z-index:100;color:blue; margin-top:-' + (height/2) + 'px;width:' + width + 'px');
+        warningMessage.setAttribute('style', 'font-family: "Verdana", sans-serif;text-align:center;position:absolute; z-index:100;color:blue; margin-top:-' + (height * 0.7) + 'px;width:' + width + 'px');
         $(warningMessage).html('<p> <strong><u>Content Warning:</u> Topics you marked as inappropriate have been found in this article</strong> </p>');
 
         var showContent = document.createElement(('div'));
-        showContent.setAttribute('style','float: right; margin-top: 20px; margin-right: 50px');
+        showContent.setAttribute('style','font-family: "Verdana", sans-serif;text-align: center; float: right; margin-top: 20px; width:' + (width/2) + 'px');
         $(showContent).html("<p>Show content</p>");
 
         var showTriggers = document.createElement('div');
-        showTriggers.setAttribute('style','float: left; margin-top: 20px; margin-left: 50px');
+        showTriggers.setAttribute('style','font-family: "Verdana", sans-serif;text-align: center; float: left; margin-top: 20px; width:' + (width/2) + 'px');
         var showTriggerContent = document.createElement('p');
         $(showTriggerContent).html("Show flagged topics");
 
         var hideTriggerContent = document.createElement('p');
-        $(hideTriggerContent).html('The following content was flagged: </br> ' + warnings + '</br>' + 'Hide Content');
+        $(hideTriggerContent).html('The following content was flagged: </br> ' + warnings + '</br> </br>' + 'Hide Content');
 
         $(showTriggers).html(showTriggerContent);
         warningMessage.appendChild(showContent);
@@ -45,8 +45,6 @@ function mask(domObj, triggers){
         maskDiv.appendChild(warningMessage);
         maskDiv.appendChild(background);
         domObj.parentNode.appendChild(maskDiv);
-        alreadyHidden.push(domObj);
-    }
 }
 
 const TWEET_CONTAINER_CLASS = "tweet";
@@ -57,10 +55,17 @@ function fixAllPosts() {
     var containers = findAllContainers();
     var arr = Array.from(containers);
     var not_promo = arr.filter((e) => !$(e).hasClass("promoted-tweet"));
-    not_promo.filter((obj) => !alreadyHidden.includes(obj)).map(checkOneContainer);
+    var not_checked = not_promo.filter((obj) => !alreadyHidden.includes(obj))
+    if (not_checked.length > 0 ){
+        console.log('fixing all new posts');
+        not_checked.map(checkOneContainer);
+    } else {
+        console.log('all posts already fixed');
+    }
 }
 
 function checkOneContainer(elem) {
+    alreadyHidden.push(elem);
     var link = getLinkFromTweetContainer(elem);
     var tweet = getTweetTextFromTweetContainer(elem);
 
@@ -114,14 +119,13 @@ function getTriggerWarning(content, callback, typ) {
     if (content != undefined) {
         // Response is a json with (key,value) = (category, true for triggered)
         var data = {link: content, type: typ};
-        var dummy_response = {violence:true, graphic_imagery:true, animal_abuse:true, sexual_violence: true};
         $.ajax({
                 type: "GET",
                 url: 'http://192.168.43.148:8000/content_warning',
                 data: data,
                 success: callback,
-                error: () => callback(dummy_response),
-                timeout: 1000,
+                // error: () => callback(dummy_response),
+                // timeout: 1000,
         });
     } else {
         callback(undefined)
