@@ -2,21 +2,22 @@
     "name": "Content Analysis",
     "version": "0.1",
     "description": "Analyses content for trigger warnings and user sentiment analysis",
-    "permissions": ["declarativeContent", "storage", "activeTab"],
+    "permissions": ["declarativeContent", "storage", "activeTab", "http://*/"],
     "background": {
         "scripts": ["background/trigger-warning-reddit.js"],
         "persistent": false
     },
     "content_scripts": [
         {
+<<<<<<< HEAD
             "matches": ["http://twitter.com/*", "https://twitter.com/*"],
             "run_at": "document_idle",
-            "js": ["content/jquery.js", "content/hideTriggers.js"]
+            "js": ["content/jquery.js", "content/hideTriggersTwitter.js"]
         },
         {
-            "matches": ["http://*twitter.com/*", "https://*.twitter.com/*"],
-            "run_at": "document_idle",
-            "js": ["content/jquery.js", "content/hideTriggers.js"]
+            "matches": ["http://*.reddit.com/*", "https://*.reddit.com/*"],
+            "run_at": "document_end",
+            "js": ["content/jquery.js", "content/hideTriggersReddit.js"]
         }
     ],
     "page_action": {
