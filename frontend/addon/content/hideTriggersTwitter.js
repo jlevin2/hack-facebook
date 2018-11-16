@@ -40,15 +40,20 @@ function checkOneContainer(elem) {
     getTriggerWarning(tweet, callback, 'text');
 }
 
-function callMaskIfTriggering(elem,trigger_report) {
-    var triggered = [];
-    for (var property in trigger_report) {
-        if (trigger_report[property]) {
-            triggered.push(property);
+function callMaskIfTriggering(elem,triggered) {
+    triggers = triggered.length;
+    if (triggers > 0) {
+        triggeredToMask = [];
+        for (i = 0; i < triggers; i++){
+            chrome.storage.sync.get([triggers[i]], function(result){
+                if (result !== undefined){
+                    triggeredToMask.push(triggers[i]);
+                }
+            });
         }
-    }
-    if (triggered.length > 0){
-        mask(elem, triggered);
+        if (triggeredToMask.length > 0) {
+            mask(elem, triggeredToMask);
+        }
     }
 }
 
