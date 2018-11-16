@@ -1,23 +1,49 @@
+/* 
+ * Masks the given domObject with all listed triggers
+ */
+function mask(domObj, triggers){
+    var maskDiv = document.createElement("div");
+    maskDiv.setAttribute("style", '"opacity:0.8;background-color:black;"');
+    var warnings = "";
+    numTriggers = triggers.length();
+    var i = 0;
+    for (i = 0; i < numTriggers; i++){
+        warnings = warnings + triggers[i];
+    }
+    maskDiv.text = 'Trigger Warning: ' + warnings;
+}
+
 function getElementByXpath(path) {
   return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 
-const POST_CONTAINER_CLASS = getElementByXpath(
-    "//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]"
-).className;
 
-const POST_TITLE_CLASS = getElementByXpath(
-    "//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a"
-).className;
+
+var POST_CONTAINER_CLASS = "";
+    
+if (getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]") != undefined) { 
+    POST_CONTAINER_CLASS = getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]").className; 
+} else { 
+    POST_CONTAINER_CLASS = "_1poyrkZ7g36PawDueRza-J"; 
+}
+
+var POST_TITLE_CLASS = "";
+
+if (getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a") != undefined) { 
+    POST_TITLE_CLASS = getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a").className; 
+} else { 
+    POST_TITLE_CLASS = "SQnoC3ObvgnGjWt90zD9Z"; 
+}
 
 
 function fixAllPosts() {
     var containers = findAllContainers();
-    containers.map(checkOneContainer);
+    var arr = Array.prototype.slice.call( containers );
+    arr.map(checkOneContainer);
 }
 
 function checkOneContainer(elem) {
-    var link = getLinkFromPostElement(getTitleFromContainer(elem);
+    var link = getLinkFromPostElement(getTitleFromContainer(elem));
     const callback = (x) => callMaskIfTriggering(elem,x);
     getTriggerWarning(link, callback);
 }
@@ -25,7 +51,7 @@ function checkOneContainer(elem) {
 function callMaskIfTriggering(elem,trigger_report) {
     var triggered = [];
     for (var property in trigger_report) {
-        if trigger_report[property] {
+        if (trigger_report[property]) {
             triggered.push(property);
         }
     }
@@ -46,7 +72,7 @@ function getTriggerWarning(postLink, callback) {
     // Response is a json with (key,value) = (category, true for triggered)
     var data = {link : postLink, type: 'url'};
     $.ajax(
-        '',
+        'http://172.22.171.7:8000/content_warning',
         data,
         callback
     );
@@ -88,3 +114,4 @@ function getSentimentAnalysis(postLink) {
     return response;
 }
 
+fixAllPosts();
