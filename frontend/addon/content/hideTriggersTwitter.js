@@ -23,8 +23,6 @@ const TWEET_CONTAINER_CLASS = "tweet";
 
 const TWEET_TEXT_CLASS = "tweet-text";
 
-const TWEET_OUTBOUND_LINK = "js-openLink";
-
 function fixAllPosts() {
     var containers = findAllContainers();
     var arr = Array.from(containers);
@@ -34,10 +32,10 @@ function fixAllPosts() {
 function checkOneContainer(elem) {
     var link = getLinkFromTweetContainer(elem);
     var tweet = getTweetTextFromTweetContainer(elem);
-    /*if (link == undefined) {
-        return;
-    }*/
+
     const callback = (x) => callMaskIfTriggering(elem,x);
+    const callback1 = (x) => getTriggerWarning(tweet,callback);
+
     //getTriggerWarning(link, callback, 'url');
     getTriggerWarning(tweet, callback, 'text');
 }
@@ -91,7 +89,7 @@ function getLinkFromTweetContainer(elem) {
     var p_class = elem.getElementsByClassName(TWEET_TEXT_CLASS);
     if (p_class != undefined) {
         var children = p_class.getElementsByTagName('a');
-        if (children.length > 0) {
+        if (children != undefined && children.length > 0) {
             return children[0].href;
         }
     }
@@ -102,22 +100,5 @@ function findAllContainers() {
     return document.getElementsByClassName(TWEET_CONTAINER_CLASS);
 }
 
-/**
- * given a postLink, gets the sentiment analysis of the content in the link
- * @param postLink - url to the post to scan
- *
- * @returns Object - a json with two (key,value) where the keys are score
- * and magnitude
- */
-function getSentimentAnalysis(postLink) {
-    var DUMMY_RESPONSE = {
-        'score' : 1.1,
-        'magnitude' : 15
-    };
 
-    var response = DUMMY_RESPONSE;
-    console.log(response);
-
-    return response;
-}
 fixAllPosts();
