@@ -4,6 +4,7 @@
     "description": "Analyses content for trigger warnings and user sentiment analysis",
     "permissions": ["declarativeContent", "storage", "activeTab", "http://*/"],
     "background": {
+        "default_icon": "images/inactive_icon.png",
         "scripts": ["background/trigger-warning-reddit.js", "background/trigger-warning-twitter.js"],
         "persistent": false
     },
@@ -21,7 +22,7 @@
     ],
     "page_action": {
         "default_popup": "menu/menu.html",
-        "default_icon": "images/icon.png"
+        "default_icon": "images/active_icon.png"
     },
     "manifest_version": 2
 }
