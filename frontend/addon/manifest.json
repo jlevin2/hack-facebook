@@ -4,7 +4,6 @@
     "description": "Analyses content for trigger warnings and user sentiment analysis",
     "permissions": ["declarativeContent", "storage", "activeTab", "http://*/"],
     "background": {
-        "default_icon": "images/inactive_icon.png",
         "scripts": ["background/trigger-warning-reddit.js", "background/trigger-warning-twitter.js"],
         "persistent": false
     },
