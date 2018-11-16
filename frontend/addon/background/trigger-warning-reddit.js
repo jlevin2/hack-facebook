@@ -10,12 +10,3 @@ chrome.runtime.onInstalled.addListener(function() {
         }]);
     });
 });
-
-
-/*chrome.runtime.onInstalled.addListener(function() {
-
-});
-
-function mask(domObj) {
-    
-}*/

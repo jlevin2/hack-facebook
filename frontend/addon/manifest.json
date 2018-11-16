@@ -2,11 +2,18 @@
     "name": "Content Analysis",
     "version": "0.1",
     "description": "Analyses content for trigger warnings and user sentiment analysis",
-    "permissions": ["declarativeContent", "storage"],
+    "permissions": ["declarativeContent", "storage", "activeTab"],
     "background": {
         "scripts": ["background/trigger-warning-reddit.js"],
         "persistent": false
     },
+    "content_scripts": [
+        {
+            "matches": ["http://*.reddit.com/*", "https://*.reddit.com/*"],
+            "run_at": "document_idle",
+            "js": ["content/jquery.js", "content/hideTriggers.js"]
+        }
+    ],
     "page_action": {
         "default_popup": "menu/menu.html",
         "default_icon": "images/icon.png"
