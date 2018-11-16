@@ -21,7 +21,7 @@ magnitude - amount of emotional content in the text
 def getTextSentiment(text):
     document = language.types.Document(
         content=text,
-        type='PLAIN_TEXT',
+        type=enums.Document.Type.PLAIN_TEXT,
     )
 
     response = CLIENT.analyze_sentiment(document=document, encoding_type='UTF32')
@@ -33,8 +33,9 @@ def getTextSentiment(text):
 
     return json.dumps(toConvert)
 
+
 """
-getTextSentiment takes in HTML to run sentiment analysis on
+getHTMLSentiment takes in HTML to run sentiment analysis on
 returns a string representation of a json, with the following fields:
 score - overall emotion of a document
 magnitude - amount of emotional content in the text
@@ -44,7 +45,7 @@ magnitude - amount of emotional content in the text
 def getHTMLSentiment(html):
     document = language.types.Document(
         content=html,
-        type='HTML',
+        type=enums.Document.Type.HTML,
     )
 
     response = CLIENT.analyze_sentiment(document=document, encoding_type='UTF32')
@@ -54,6 +55,12 @@ def getHTMLSentiment(html):
     toConvert = {"score": sentiment.score, "magnitude": sentiment.magnitude}
 
     return json.dumps(toConvert)
+
+
+"""
+getURLSentiment takes in a url and runs sentiment analysis on the HTML content of the page
+"""
+
 
 def getURLSentiment(url):
     content = requests.get(url=url)
