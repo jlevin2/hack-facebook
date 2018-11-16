@@ -33,17 +33,31 @@ function checkOneContainer(elem) {
     var link = getLinkFromTweetContainer(elem);
     var tweet = getTweetTextFromTweetContainer(elem);
 
-    const callback = (x) => callMaskIfTriggering(elem,x);
-    const callback1 = (x) => getTriggerWarning(tweet,callback);
-
-    //getTriggerWarning(link, callback, 'url');
-    getTriggerWarning(tweet, callback, 'text');
+    getTriggerWarning(tweet, ((r1) => getTriggerWarning(link, ((r2) => callMaskIfTriggering(elem, r1,r2)), 'url')), 'text');
 }
 
-function callMaskIfTriggering(elem,triggered) {
-    triggers = triggered.length;
+function callMaskIfTriggering(elem,response1, response2) {
+    var triggered = [];
+
+    if (response1 != undefined) {
+        for (var property in response1) {
+            if (response1[property]) {
+                triggered.push(property);
+            }
+        }
+    }
+
+    if (response2 != undefined) {
+        for (var property in response2) {
+            if (response2[property]) {
+                triggered.push(property);
+            }
+        }
+    }
+
+    var triggers = triggered.length;
     if (triggers > 0) {
-        triggeredToMask = [];
+        var triggeredToMask = [];
         for (i = 0; i < triggers; i++){
             chrome.storage.sync.get([triggers[i]], function(result){
                 if (result !== undefined){
@@ -67,14 +81,19 @@ function callMaskIfTriggering(elem,triggered) {
  * if the triggering category is present
  */
 function getTriggerWarning(content, callback, typ) {
-    // Response is a json with (key,value) = (category, true for triggered)
-    var data = {link : content, type: typ};
-    $.ajax({
-        type: "GET",
-        url: 'http://192.168.43.148:8000/content_warning',
-        data: data,
-        success: callback}
-    );
+    if (content != undefined) {
+        // Response is a json with (key,value) = (category, true for triggered)
+        var data = {link: content, type: typ};
+        $.ajax({
+                type: "GET",
+                url: 'http://192.168.43.148:8000/content_warning',
+                data: data,
+                success: callback
+            }
+        );
+    } else {
+        callback(undefined)
+    }
 }
 
 
