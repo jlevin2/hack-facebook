@@ -1,0 +1,10 @@
+html, body {
+    width: 200px;
+}
+
+body {
+    background-color: #4688F1;
+    color: #FFFFFF;
+    font-family: Sans-serif;
+    font-size: 14pt;
+}

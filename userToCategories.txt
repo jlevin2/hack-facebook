@@ -1,0 +1,2 @@
+veteran:violence,graphic_imagery
+survivor:sexual_violence,graphic_imagery

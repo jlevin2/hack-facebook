@@ -1,0 +1,15 @@
+{
+    "name": "Content Analysis",
+    "version": "0.1",
+    "description": "Analyses content for trigger warnings and user sentiment analysis",
+    "permissions": ["declarativeContent", "storage"],
+    "background": {
+        "scripts": ["background/trigger-warning-reddit.js"],
+        "persistent": false
+    },
+    "page_action": {
+        "default_popup": "menu/menu.html",
+        "default_icon": "images/icon.png"
+    },
+    "manifest_version": 2
+}
