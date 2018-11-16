@@ -6,30 +6,46 @@ from .models import CWDocument
 from .ml import runModel
 # Create your views here.
 
+#THRESHOLD = 0.5
+
 def response(inp):
     url = inp.GET.get('url')
     cw = inp.GET.get('cw')
-    return HttpResponse(json.dumps(handleRequest(url, cw)))
+    dct = handleRequest(url, cw)
+    dct['url'] = url
+    return HttpResponse(json.dumps(dct))
 
 
 def handleRequest(url, cw):
     contents = CWDocument.objects.filter(page_id=url)
     if len(contents) == 0:
-        return flag(contents, getDoc(url))
+        return flag(getDoc(url), cw)
     else:
         return flag(contents, cw)
 
 
 
 def getDoc(url):
+    categories = open('/Users/JoshLevin/Desktop/hack@facebook/hack-facebook/categories.txt', 'r')
+    cat = categories.read().splitlines()
+    newObj = []
 
+    safe = runModel(url)
+    for i,c in enumerate(cat):
+        newObj.append(CWDocument.objects.create(page_id=url, trigger_content=c, unsafe=safe[i]))
+        newObj[i].save()
 
-    new = CWDocument.objects.create(page_id=url, score=sentiment['score'], emotion=sentiment['magnitude'])
-    new.save()
-    return new.as_dict()
+    return newObj
 
 def flag(contents, cw):
-    return False
+    resp = {}
+
+    for elem in contents:
+        if elem.trigger_content in cw:
+            resp[elem.trigger_content] = elem.unsafe
+
+
+    return resp
 
 #
 # def response(request):
