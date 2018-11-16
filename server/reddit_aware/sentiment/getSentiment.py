@@ -1,40 +1,35 @@
-# Imports the Google Cloud client library
-from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 import json
 import requests
 
 API_KEY = "AIzaSyC0sWDhT_vZqjWkBiPjb6vQT2wvtYbkAYo"
-
-CLIENT = language.LanguageServiceClient()
-
+URL = "https://language.googleapis.com/v1/documents:analyzeSentiment?fields=documentSentiment%2Csentences&key="
 
 """
 getTextSentiment takes in PLAIN TEXT to run sentiment analysis on
-returns a string representation of a json, with the following fields:
+returns a dictionary, with the following fields:
 score - overall emotion of a document
 magnitude - amount of emotional content in the text
 """
 
 
 def getTextSentiment(text):
-    document = language.types.Document(
-        content=text,
-        type='PLAIN_TEXT',
-    )
+    end_point = URL + API_KEY
+    params = {'document': {'content': text,
+                           'type': enums.Document.Type.PLAIN_TEXT},
+              'encodingType': enums.EncodingType.UTF8}
+    r = requests.post(url=end_point, json=params)
+    response = json.loads(r.text)
+    document_sentiment = response['documentSentiment']
+    sentence_sentiment = response['sentences']
+    print(document_sentiment)
+    print(sentence_sentiment)
+    return response
 
-    response = CLIENT.analyze_sentiment(document=document, encoding_type='UTF32')
-
-    sentiment = response.document_sentiment
-
-
-    toConvert = {"score": sentiment.score, "magnitude":sentiment.magnitude}
-
-    return json.dumps(toConvert)
 
 """
-getTextSentiment takes in HTML to run sentiment analysis on
+getHTMLSentiment takes in HTML to run sentiment analysis on
 returns a string representation of a json, with the following fields:
 score - overall emotion of a document
 magnitude - amount of emotional content in the text
@@ -42,18 +37,23 @@ magnitude - amount of emotional content in the text
 
 
 def getHTMLSentiment(html):
-    document = language.types.Document(
-        content=html,
-        type='HTML',
-    )
+    end_point = URL + API_KEY
+    params = {'document': {'content': html,
+                           'type': enums.Document.Type.HTML},
+              'encodingType': enums.EncodingType.UTF8}
+    r = requests.post(url=end_point, json=params)
+    response = json.loads(r.text)
+    document_sentiment = response['documentSentiment']
+    sentence_sentiment = response['sentences']
+    print(document_sentiment)
+    print(sentence_sentiment)
+    return response
 
-    response = CLIENT.analyze_sentiment(document=document, encoding_type='UTF32')
 
-    sentiment = response.document_sentiment
+"""
+getURLSentiment takes in a url and runs sentiment analysis on the HTML content of the page
+"""
 
-    toConvert = {"score": sentiment.score, "magnitude": sentiment.magnitude}
-
-    return json.dumps(toConvert)
 
 def getURLSentiment(url):
     content = requests.get(url=url)
