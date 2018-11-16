@@ -2,7 +2,7 @@
     "name": "Content Analysis",
     "version": "0.1",
     "description": "Analyses content for trigger warnings and user sentiment analysis",
-    "permissions": ["declarativeContent", "storage", "activeTab"],
+    "permissions": ["declarativeContent", "storage", "activeTab", "http://*/"],
     "background": {
         "scripts": ["background/trigger-warning-reddit.js"],
         "persistent": false
@@ -10,7 +10,7 @@
     "content_scripts": [
         {
             "matches": ["http://*.reddit.com/*", "https://*.reddit.com/*"],
-            "run_at": "document_idle",
+            "run_at": "document_end",
             "js": ["content/jquery.js", "content/hideTriggers.js"]
         }
     ],
