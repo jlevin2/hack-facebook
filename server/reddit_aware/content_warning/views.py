@@ -7,7 +7,6 @@ import hashlib
 from .ml import runModel
 # Create your views here.
 
-#THRESHOLD = 0.5
 
 def response(inp):
     #url = inp.GET.get('url')
@@ -24,8 +23,6 @@ def handleRequest(url, typ):
         return flag(getDoc(url, typ))
     else:
         return flag(contents)
-
-
 
 def getDoc(cont, typ):
     categories = open('/Users/JoshLevin/Desktop/hack@facebook/hack-facebook/categories.txt', 'r')

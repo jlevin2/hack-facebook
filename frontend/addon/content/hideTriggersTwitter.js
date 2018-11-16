@@ -6,7 +6,6 @@ var alreadyHidden = [];
 
 function mask(domObj, triggers){
     if (!alreadyHidden.includes(domObj)) {
-        console.log("Masking content");
         var previous_style = domObj.getAttribute('style');
         domObj.setAttribute('style', '-webkit-filter: blur(9px);'  + previous_style);
         var maskDiv = document.createElement("div");
@@ -17,18 +16,17 @@ function mask(domObj, triggers){
         triggers = triggers.map((s) => s.replace('_', ' '));
         var warnings = triggers.join(', ');
 
-        console.log(warnings);
 
         var warningMessage = document.createElement('div');
         warningMessage.setAttribute('style', 'text-align:center;position:absolute; z-index:100;color:blue; margin-top:-' + (height/2) + 'px;width:' + width + 'px');
         $(warningMessage).html('<p> <strong><u>Content Warning:</u> Topics you marked as inappropriate have been found in this article</strong> </p>');
 
         var showContent = document.createElement(('div'));
-        showContent.setAttribute('style','float: right; margin-top: 20px; margin-right: 40px');
+        showContent.setAttribute('style','float: right; margin-top: 20px; margin-right: 50px');
         $(showContent).html("<p>Show content</p>");
 
         var showTriggers = document.createElement('div');
-        showTriggers.setAttribute('style','float: left; margin-top: 20px; margin-left: 40px');
+        showTriggers.setAttribute('style','float: left; margin-top: 20px; margin-left: 50px');
         var showTriggerContent = document.createElement('p');
         $(showTriggerContent).html("Show flagged topics");
 
@@ -41,8 +39,8 @@ function mask(domObj, triggers){
 
 
         $(showContent).on('click', function() {$(maskDiv).hide(); domObj.setAttribute('style', previous_style);});
-        $(showTriggerContent).on('click', function() {$(showTriggers).html(hideTriggerContent)});
-        $(hideTriggerContent).on('click', function() {$(showTriggers).html(showTriggerContent)});
+        $(showTriggerContent).on('click', function() {$(this).detach(); showTriggers.appendChild(hideTriggerContent);});
+        $(hideTriggerContent).on('click', function() {$(this).detach(); showTriggers.appendChild(showTriggerContent);});
 
         maskDiv.appendChild(warningMessage);
         maskDiv.appendChild(background);
