@@ -27,10 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/JoshLevin/Desktop/hack@facebook/hack-facebook/server/reddit_aware/sentiment/keys/hackfacebook-222621-4f898e3d935e.json'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'sentiment',
     'content_warning',
     'django.contrib.admin',
     'django.contrib.auth',
