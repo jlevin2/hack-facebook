@@ -1,14 +1,10 @@
-# Imports the Google Cloud client library
-from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 import json
 import requests
 
 API_KEY = "AIzaSyC0sWDhT_vZqjWkBiPjb6vQT2wvtYbkAYo"
-
-CLIENT = language.LanguageServiceClient()
-
+URL = "https://language.googleapis.com/v1/documents:analyzeSentiment?fields=documentSentiment%2Csentences&key="
 
 """
 getTextSentiment takes in PLAIN TEXT to run sentiment analysis on
@@ -19,18 +15,17 @@ magnitude - amount of emotional content in the text
 
 
 def getTextSentiment(text):
-    document = language.types.Document(
-        content=text,
-        type=enums.Document.Type.PLAIN_TEXT,
-    )
-
-    response = CLIENT.analyze_sentiment(document=document, encoding_type='UTF32')
-
-    sentiment = response.document_sentiment
-
-    to_return = {"score": sentiment.score, "magnitude":sentiment.magnitude}
-
-    return to_return
+    end_point = URL + API_KEY
+    params = {'document': {'content': text,
+                           'type': enums.Document.Type.PLAIN_TEXT},
+              'encodingType': enums.EncodingType.UTF8}
+    r = requests.post(url=end_point, json=params)
+    response = json.loads(r.text)
+    document_sentiment = response['documentSentiment']
+    sentence_sentiment = response['sentences']
+    print(document_sentiment)
+    print(sentence_sentiment)
+    return response
 
 
 """
@@ -42,18 +37,17 @@ magnitude - amount of emotional content in the text
 
 
 def getHTMLSentiment(html):
-    document = language.types.Document(
-        content=html,
-        type=enums.Document.Type.HTML,
-    )
-
-    response = CLIENT.analyze_sentiment(document=document, encoding_type='UTF32')
-
-    sentiment = response.document_sentiment
-
-    to_return = {"score": sentiment.score, "magnitude": sentiment.magnitude}
-
-    return to_return
+    end_point = URL + API_KEY
+    params = {'document': {'content': html,
+                           'type': enums.Document.Type.HTML},
+              'encodingType': enums.EncodingType.UTF8}
+    r = requests.post(url=end_point, json=params)
+    response = json.loads(r.text)
+    document_sentiment = response['documentSentiment']
+    sentence_sentiment = response['sentences']
+    print(document_sentiment)
+    print(sentence_sentiment)
+    return response
 
 
 """
