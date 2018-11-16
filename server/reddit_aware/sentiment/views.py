@@ -3,7 +3,7 @@ from django.http import JsonResponse
 import json
 import requests
 # Create your views here.
-from .getSentimentObject import getURLSentiment
+#from .getSentimentObject import getURLSentiment
 from .models import SentDocument
 
 
@@ -23,7 +23,8 @@ def handleRequest(url):
 
 
 def getDoc(url):
-    sentiment = dict(getURLSentiment(url))
+    sentiment = {'score':0, 'magnitude':0}
+    #sentiment = dict(getURLSentiment(url))
     new = SentDocument.objects.create(page_id=url, score=sentiment['score'], emotion=sentiment['magnitude'])
     new.save()
     return new.as_dict()
