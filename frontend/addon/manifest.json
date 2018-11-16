@@ -9,7 +9,12 @@
     },
     "content_scripts": [
         {
-            "matches": ["http://*.reddit.com/*", "https://*.reddit.com/*"],
+            "matches": ["http://twitter.com/*", "https://twitter.com/*"],
+            "run_at": "document_idle",
+            "js": ["content/jquery.js", "content/hideTriggers.js"]
+        },
+        {
+            "matches": ["http://*twitter.com/*", "https://*.twitter.com/*"],
             "run_at": "document_idle",
             "js": ["content/jquery.js", "content/hideTriggers.js"]
         }

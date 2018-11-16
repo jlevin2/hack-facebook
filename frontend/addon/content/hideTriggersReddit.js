@@ -18,21 +18,20 @@ function getElementByXpath(path) {
 }
 
 
-
 var POST_CONTAINER_CLASS = "";
-    
-if (getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]") != undefined) { 
-    POST_CONTAINER_CLASS = getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]").className; 
-} else { 
-    POST_CONTAINER_CLASS = "_1poyrkZ7g36PawDueRza-J"; 
+
+if (getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]") != undefined) {
+    POST_CONTAINER_CLASS = getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]").className;
+} else {
+    POST_CONTAINER_CLASS = "_1poyrkZ7g36PawDueRza-J";
 }
 
 var POST_TITLE_CLASS = "";
 
-if (getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a") != undefined) { 
-    POST_TITLE_CLASS = getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a").className; 
-} else { 
-    POST_TITLE_CLASS = "SQnoC3ObvgnGjWt90zD9Z"; 
+if (getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a") != undefined) {
+    POST_TITLE_CLASS = getElementByXpath("//html/body/div[@id='2x-container']/div/div/div[@id='SHORTCUT_FOCUSABLE_DIV']/div/div/div/div/div[3]/div/div/div[1]/div/div/div[2]/div/div[2]/div/span/a").className;
+} else {
+    POST_TITLE_CLASS = "SQnoC3ObvgnGjWt90zD9Z";
 }
 
 
