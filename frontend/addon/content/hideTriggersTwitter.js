@@ -58,13 +58,14 @@ function callMaskIfTriggering(elem,response1, response2) {
     var triggers = triggered.length;
     if (triggers > 0) {
         var triggeredToMask = [];
-        for (i = 0; i < triggers; i++){
-            chrome.storage.sync.get([triggers[i]], function(result){
-                if (result !== undefined){
-                    triggeredToMask.push(triggers[i]);
+        chrome.storage.sync.get(triggers[i], function(result){
+            reses = result.length;
+            for (var field in result) {
+                if (result[field] == true && triggered.includes(field)) {
+                    triggeredToMask.push(field);
                 }
-            });
-        }
+            }
+        });
         if (triggeredToMask.length > 0) {
             mask(elem, triggeredToMask);
         }
@@ -111,8 +112,8 @@ function getTweetTextFromTweetContainer(elem) {
 
 function getLinkFromTweetContainer(elem) {
     var p_class = elem.getElementsByClassName(TWEET_TEXT_CLASS);
-    if (p_class != undefined) {
-        var children = p_class.getElementsByTagName('a');
+    if (p_class != undefined && p_class.length > 0) {
+        var children = p_class[0].children;
         if (children != undefined && children.length > 0) {
             return children[0].href;
         }
