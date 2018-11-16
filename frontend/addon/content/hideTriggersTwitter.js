@@ -88,10 +88,14 @@ function getTweetTextFromTweetContainer(elem) {
 }
 
 function getLinkFromTweetContainer(elem) {
-    if (elem == undefined) {
-        return undefined;
+    var p_class = elem.getElementsByClassName(TWEET_TEXT_CLASS);
+    if (p_class != undefined) {
+        var children = p_class.getElementsByTagName('a');
+        if (children.length > 0) {
+            return children[0].href;
+        }
     }
-    return elem.href;
+    return undefined;
 }
 
 function findAllContainers() {

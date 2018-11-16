@@ -25,7 +25,7 @@ SECRET_KEY = 'xjp7p$8m*9p47)-8)x(1#m0x@(s4t5e2ol+xtk66acfreq#=0&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/JoshLevin/Desktop/hack@facebook/hack-facebook/server/reddit_aware/sentiment/keys/hackfacebook-222621-4f898e3d935e.json'
 
