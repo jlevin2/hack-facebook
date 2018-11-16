@@ -80,8 +80,8 @@ function getTriggerWarning(postLink, callback) {
 
 function getTweetTextFromTweetContainer(elem) {
     var p_class = elem.getElementsByClassName(TWEET_TEXT_CLASS);
-    if (p_class != undefined) {
-        return p_class[0];
+    if (p_class != undefined && p_class.length > 0) {
+        return p_class[0].textContent;
     }
     return undefined;
 }
