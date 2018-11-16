@@ -19,14 +19,11 @@ function mask(domObj, triggers){
     domObj.parentNode.appendChild(maskDiv);
 }
 
-function getElementByXpath(path) {
-  return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-}
+const TWEET_CONTAINER_CLASS = "tweet";
 
+const TWEET_TEXT_CLASS = "tweet-text";
 
-const POST_CONTAINER_CLASS = "_1poyrkZ7g36PawDueRza-J";
-
-const POST_TITLE_CLASS = "SQnoC3ObvgnGjWt90zD9Z";
+const TWEET_OUTBOUND_LINK = "js-openLink";
 
 function fixAllPosts() {
     var containers = findAllContainers();
@@ -35,7 +32,8 @@ function fixAllPosts() {
 }
 
 function checkOneContainer(elem) {
-    var link = getLinkFromPostElement(getTitleFromContainer(elem));
+    var link = getLinkFromTweetContainer(elem);
+    var tweet = getTweetTextFromTweetContainer(elem);
     if (link == undefined) {
         return;
     }
@@ -80,11 +78,16 @@ function getTriggerWarning(postLink, callback) {
  * Methods to find DOM elements
  */
 
-function getTitleFromContainer(elem) {
-    return elem.getElementsByClassName(POST_TITLE_CLASS)[0];
+function getTweetTextFromTweetContainer(elem) {
+    var p_class = elem.getElementsByClassName(TWEET_TEXT_CLASS);
+    if (p_class != undefined) {
+        return p_class[0];
+    }
+    return undefined;
 }
 
-function getLinkFromPostElement(elem) {
+function getLinkFromTweetContainer(elem) {
+
     if (elem == undefined) {
         return undefined;
     }
