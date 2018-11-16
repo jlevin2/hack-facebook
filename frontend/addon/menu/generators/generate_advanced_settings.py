@@ -4,7 +4,7 @@ from xml.etree import ElementTree as ET
 html = ET.Element('html')
 head = ET.Element('head')
 generalStyles = ET.Element('link', attrib={'rel': 'stylesheet', 'href': 'styles.css'})
-advJS = ET.Element('script', attrib={'src': 'advanced_settings.js'})
+advJS = ET.Element('script', attrib={'src': 'advanced_settings.js', 'defer': ''})
 head.append(generalStyles)
 head.append(advJS)
 html.append(head)
@@ -36,19 +36,22 @@ with open("../../../../categories.txt", "r") as cats:
             jsFile.write("""chrome.storage.sync.get(['""" + cat + """'], function(result) {
                     if (result === undefined){ 
                         document.getElementById('""" + cat + '_id' + """').checked = false;
-                        console.log("checked """ + cat + """ to false");
-                    } else if(result === true){
+                        console.log("not found checked """ + cat + """ to false");
+                    } else if(result.""" + cat + """ === true){
                         document.getElementById('""" + cat + '_id' + """').checked = true;
                         console.log("checked """ + cat + """ to true");
                     } else { 
                         document.getElementById('""" + cat + '_id' + """').checked = false;
-                        console.log("checked """ + cat + """ to false");
+                        console.log("checked """ + cat + """ to false, res was: " + result.toString());
                     }
                 });
                 """)
+with open("../../../../categories.txt", "r") as cats:
+    with open('../advanced_settings.js', 'a') as jsFile:
         for cat in cats: # add listeners to see if we check or uncheck them
             cat = cat.rstrip()
-            jsFile.write("""var checkbox_""" + cat + """ = document.querySelector("input[name=""" + cat + """]");
+            jsFile.write("""
+            var checkbox_""" + cat + """ = document.getElementById('""" + cat + """_id');
                 checkbox_""" + cat + """.addEventListener( 'change', function() {
                     if(this.checked) {
                         chrome.storage.sync.set({'"""+cat+"""': true}, function(){
