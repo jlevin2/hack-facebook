@@ -17,9 +17,9 @@ function fixAllPosts() {
 }
 
 function checkOneContainer(elem) {
-    var link = getLinkFromPostElement(getTitleFromContainer(elem))
-
-    getTitleFromContainer(link, elem);
+    var link = getLinkFromPostElement(getTitleFromContainer(elem);
+    const callback = (x) => callMaskIfTriggering(elem,x);
+    getTriggerWarning(link, callback);
 }
 
 function callMaskIfTriggering(elem,trigger_report) {
@@ -32,6 +32,30 @@ function callMaskIfTriggering(elem,trigger_report) {
 
     mask(elem, triggered);
 }
+
+
+/**
+ * given a postLink, gets the trigger warnings associated with the content
+ * in the link
+ * @param postLink - url to the post to scan
+ *
+ * @return Object - a json where the keys are categories, and values is true
+ * if the triggering category is present
+ */
+function getTriggerWarning(postLink, callback) {
+    // Response is a json with (key,value) = (category, true for triggered)
+    var data = {link : postLink};
+    $.ajax(
+        '',
+        data,
+        callback
+    );
+}
+
+
+/**
+ * Methods to find DOM elements
+ */
 
 function getTitleFromContainer(elem) {
     return elem.getElementsByClassName(POST_TITLE_CLASS);
@@ -64,26 +88,3 @@ function getSentimentAnalysis(postLink) {
     return response;
 }
 
-
-/**
- * given a postLink, gets the trigger warnings associated with the content
- * in the link
- * @param postLink - url to the post to scan
- *
- * @return Object - a json where the keys are categories, and values is true
- * if the triggering category is present
- */
-function getTriggerWarning(postLink, callback) {
-    // Response is a json with (key,value) = (category, true for triggered)
-    var DUMMY_RESPONSE = {
-        'violence': true,
-        'sexual_violence': false,
-        'animal_abuse' : false,
-        'graphic_imagery': true
-    };
-
-    var response = DUMMY_RESPONSE;
-    console.log(response);
-
-    return response;
-}
