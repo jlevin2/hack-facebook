@@ -1,18 +1,11 @@
 # Imports the Google Cloud client library
-import getSentiment as Sentiment
+import getSentimentHTTP as Sentiment
 import json
 
 
-text = 'I feel amazing!'
+text = 'I feel amazing! I feel like I can fly! I just got an offer!'
 print('---------- input: positive plain text ---------')
 result1 = Sentiment.getTextSentiment(text)
-
-print(result1)
-
-output = json.loads(result1)
-
-print(output['magnitude'])
-print(output['score'])
 
 
 print('---------- input: medium article html ---------')
@@ -21,11 +14,6 @@ print('---------- input: medium article html ---------')
 urlSentiment = Sentiment.getURLSentiment('https://medium.com/@steve.yegge/why-i-left-google-to-join-grab-86dfffc0be84')
 
 print(urlSentiment)
-
-output1 = json.loads(urlSentiment)
-
-print(output1['magnitude'])
-print(output1['score'])
 
 print('---------- input: medium article text ---------')
 
@@ -36,8 +24,3 @@ I’ve seen Grab’s hunger. I’ve felt it. I have it. This space is win or die
 mediumSentiment = Sentiment.getTextSentiment(mediumText)
 
 print(mediumSentiment)
-
-output2 = json.loads(mediumSentiment)
-
-print(output2['magnitude'])
-print(output2['score'])

@@ -44,7 +44,7 @@ function callMaskIfTriggering(elem,trigger_report) {
  */
 function getTriggerWarning(postLink, callback) {
     // Response is a json with (key,value) = (category, true for triggered)
-    var data = {link : postLink};
+    var data = {link : postLink, type: 'url'};
     $.ajax(
         '',
         data,
@@ -80,7 +80,7 @@ function getSentimentAnalysis(postLink) {
     var DUMMY_RESPONSE = {
         'score' : 1.1,
         'magnitude' : 15
-    }
+    };
 
     var response = DUMMY_RESPONSE;
     console.log(response);
