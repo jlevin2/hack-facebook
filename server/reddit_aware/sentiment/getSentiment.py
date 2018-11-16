@@ -12,7 +12,7 @@ CLIENT = language.LanguageServiceClient()
 
 """
 getTextSentiment takes in PLAIN TEXT to run sentiment analysis on
-returns a string representation of a json, with the following fields:
+returns a dictionary, with the following fields:
 score - overall emotion of a document
 magnitude - amount of emotional content in the text
 """
@@ -28,10 +28,9 @@ def getTextSentiment(text):
 
     sentiment = response.document_sentiment
 
+    to_return = {"score": sentiment.score, "magnitude":sentiment.magnitude}
 
-    toConvert = {"score": sentiment.score, "magnitude":sentiment.magnitude}
-
-    return json.dumps(toConvert)
+    return to_return
 
 
 """
@@ -52,9 +51,9 @@ def getHTMLSentiment(html):
 
     sentiment = response.document_sentiment
 
-    toConvert = {"score": sentiment.score, "magnitude": sentiment.magnitude}
+    to_return = {"score": sentiment.score, "magnitude": sentiment.magnitude}
 
-    return json.dumps(toConvert)
+    return to_return
 
 
 """
