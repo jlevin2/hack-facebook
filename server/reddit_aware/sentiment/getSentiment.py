@@ -22,10 +22,10 @@ def getTextSentiment(text):
     r = requests.post(url=end_point, json=params)
     response = json.loads(r.text)
     document_sentiment = response['documentSentiment']
-    sentence_sentiment = response['sentences']
-    print(document_sentiment)
-    print(sentence_sentiment)
-    return response
+
+    # sentence_sentiment = response['sentences']
+
+    return document_sentiment
 
 
 """
