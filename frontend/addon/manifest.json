@@ -4,14 +4,13 @@
     "description": "Analyses content for trigger warnings and user sentiment analysis",
     "permissions": ["declarativeContent", "storage", "activeTab", "http://*/"],
     "background": {
-        "scripts": ["background/trigger-warning-reddit.js"],
+        "scripts": ["background/trigger-warning-reddit.js", "background/trigger-warning-twitter.js"],
         "persistent": false
     },
     "content_scripts": [
         {
-<<<<<<< HEAD
-            "matches": ["http://twitter.com/*", "https://twitter.com/*"],
-            "run_at": "document_idle",
+            "matches": ["http://*.twitter.com/*", "https://*.twitter.com/*"],
+            "run_at": "document_end",
             "js": ["content/jquery.js", "content/hideTriggersTwitter.js"]
         },
         {

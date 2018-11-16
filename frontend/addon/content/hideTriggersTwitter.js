@@ -34,11 +34,12 @@ function fixAllPosts() {
 function checkOneContainer(elem) {
     var link = getLinkFromTweetContainer(elem);
     var tweet = getTweetTextFromTweetContainer(elem);
-    if (link == undefined) {
+    /*if (link == undefined) {
         return;
-    }
+    }*/
     const callback = (x) => callMaskIfTriggering(elem,x);
-    getTriggerWarning(link, callback);
+    //getTriggerWarning(link, callback, 'url');
+    getTriggerWarning(tweet, callback, 'text');
 }
 
 function callMaskIfTriggering(elem,trigger_report) {
@@ -62,9 +63,9 @@ function callMaskIfTriggering(elem,trigger_report) {
  * @return Object - a json where the keys are categories, and values is true
  * if the triggering category is present
  */
-function getTriggerWarning(postLink, callback) {
+function getTriggerWarning(content, callback, typ) {
     // Response is a json with (key,value) = (category, true for triggered)
-    var data = {link : postLink, type: 'url'};
+    var data = {link : content, type: typ};
     $.ajax({
         type: "GET",
         url: 'http://192.168.43.148:8000/content_warning',
@@ -98,7 +99,7 @@ function getLinkFromTweetContainer(elem) {
 }
 
 function findAllContainers() {
-    return document.getElementsByClassName(POST_CONTAINER_CLASS);
+    return document.getElementsByClassName(TWEET_CONTAINER_CLASS);
 }
 
 /**
@@ -119,5 +120,4 @@ function getSentimentAnalysis(postLink) {
 
     return response;
 }
-
 fixAllPosts();
